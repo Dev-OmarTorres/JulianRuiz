@@ -276,13 +276,15 @@
     <!-- Countdown -->
     <div class="countdown">
 
-		<p style="font-size: 1.5rem; margin-top: 1rem">Domingo 6 de Abril - 3:00 PM</p>
+		<p style="font-size: 1.5rem; margin-top: 1rem">Domingo 6 de Abril - 3:30 PM</p>
 
 		<br>
 
 		
 
         <h2 style="font-family: 'Rye', cursive; color: var(--gold)">¡Tiempo restante para la fiesta!</h2>
+
+        <h1 style="font-family: 'Rye', cursive; color: var(--gold)">¡No Faltes!</h1>
 		
         <div class="timer" id="timer"></div>
     </div>
@@ -300,12 +302,29 @@
 
     <script>
         let slideIndex = 0;
+const intervalTime = 5000; // Tiempo en milisegundos entre cada cambio automático (5 segundos)
+const slides = document.querySelectorAll('.slide'); // Declarar globalmente una sola vez
 
-        function changeSlide(direction) {
-            const slides = document.querySelectorAll('.slide');
-            slideIndex = (slideIndex + direction + slides.length) % slides.length;
-            document.querySelector('.slider').style.transform = 'translateX(' + (-slideIndex * 100) + '%)';
-        }
+function changeSlide(direction) {
+    slideIndex = (slideIndex + direction + slides.length) % slides.length;
+    updateSlide();
+}
+
+function updateSlide() {
+    document.querySelector('.slider').style.transform = 'translateX(' + (-slideIndex * 100) + '%)';
+}
+
+function autoSlide() {
+    setInterval(() => {
+        slideIndex = (slideIndex + 1) % slides.length;
+        updateSlide();
+    }, intervalTime);
+}
+
+// Iniciar el cambio automático de slides
+autoSlide();
+
+
 
         // Reproducir música y mostrar otros elementos
         document.getElementById('musicBtn').addEventListener('click', function() {
